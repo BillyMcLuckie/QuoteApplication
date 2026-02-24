@@ -10,40 +10,50 @@
   <h1>Customer Quote</h1>
 
   <!-- Form -->
-  <div class="form-container">
+<div class="form-container">
+  <div class="form-item">
+    <label>Board Name
+      <input type="text" id="boardName">
+    </label>
+  </div>
 
-  <label>
-    Board Name
-    <input type="text" id="boardName">
-  </label>
+  <div class="form-item">
+    <label>Length (mm)
+      <input type="number" id="length">
+    </label>
+  </div>
 
-  <label>
-    Length (mm)
-    <input type="number" id="length">
-  </label>
+  <div class="form-item">
+    <label>Width (mm)
+      <input type="number" id="width">
+    </label>
+  </div>
 
-  <label>
-    Width (mm)
-    <input type="number" id="width">
-  </label>
+  <div class="form-item">
+    <label>Quantity
+      <input type="number" id="quantity" min="1" value="1">
+    </label>
+  </div>
 
-  <label>
-    Quantity
-    <input type="number" id="quantity" min="1" value="1">
-  </label>
+  <div class="form-item">
+    <label>Material
+        <select id="material">
+            <option value="">Select material</option>
+            <option value="W1000 st9 18mm">W1000 st9 18mm</option>
+            <option value="U702 st9 18mm">U702 st9 18mm</option>
+            <option value="U708 st9 18mm">U708 st9 18mm</option>
+        </select>
+    </label>
+  </div>
 
-  <label>
-    Material
-    <select id="material">
-      <option value="">Select material</option>
-      <option value="W1000 st9 18mm">W1000 st9 18mm</option>
-      <option value="U702 st9 18mm">U702 st9 18mm</option>
-      <option value="U708 st9 18mm">U708 st9 18mm</option>
-    </select>
-  </label>
+  <div class="form-item edge-selector">
+  <span class="edge top" data-edge="length1"></span>
+  <span class="edge bottom" data-edge="length2"></span>
+  <span class="edge left" data-edge="width1"></span>
+  <span class="edge right" data-edge="width2"></span>
+</div>
 
   <button id="addBtn">Add to Quote</button>
-
 </div>
 
 <!--Table -->
@@ -55,6 +65,7 @@
       <th>Width (mm)</th>
       <th>Quantity</th>
       <th>Material</th>
+      <th>Edged Sides</th>
     </tr>
   </thead>
   <tbody id="quoteTableBody">

@@ -1,3 +1,39 @@
+.edge-selector {
+  position: relative;
+  width: 60px;
+  height: 40px;
+  border: 2px solid #444;
+}
+
+.edge {
+  position: absolute;
+  background: transparent;
+  cursor: pointer;
+}
+
+.edge.top,
+.edge.bottom {
+  height: 6px;
+  width: 100%;
+  left: 0;
+}
+
+.edge.left,
+.edge.right {
+  width: 6px;
+  height: 100%;
+  top: 0;
+}
+
+.edge.top { top: -4px; }
+.edge.bottom { bottom: -4px; }
+.edge.left { left: -4px; }
+.edge.right { right: -4px; }
+
+.edge.active {
+  background-color: #007bff;
+}
+
 body {
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -5,43 +41,57 @@ body {
 }
 
 .form-container {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr) auto;
-  gap: 10px;
-  margin-bottom: 30px;
-  align-items: end;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.edge-options {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.edge-options label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    font-weight: normal;
 }
 
 label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 input, select {
-  padding: 6px;
-  font-size: 14px;
+    padding: 6px;
+    font-size: 14px;
 }
 
 button {
-  padding: 8px 14px;
-  font-size: 14px;
-  cursor: pointer;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: white;
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
 }
 
 th, td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
 }
 
 th {
-  background-color: #eee;
+    background-color: #eee;
 }
+

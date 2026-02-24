@@ -17,8 +17,22 @@ const materialInput = document.getElementById("material");
 const addBtn = document.getElementById("addBtn");
 const tableBody = document.getElementById("quoteTableBody");
 
-addBtn.addEventListener("click", addItem);
+const edgeStates = {
+  length1: false,
+  length2: false,
+  width1: false,
+  width2: false
+};
 
+document.querySelectorAll(".edge").forEach(edge => {
+  edge.addEventListener("click", () => {
+    const key = edge.dataset.edge;
+    edgeStates[key] = !edgeStates[key];
+    edge.classList.toggle("active");
+  });
+});
+
+addBtn.addEventListener("click", addItem);
 
 function addItem() {
   const boardName = boardNameInput.value.trim();
@@ -26,6 +40,7 @@ function addItem() {
   const width = Number(widthInput.value);
   const quantity = Number(quantityInput.value);
   const material = materialInput.value;
+
 
   if (!boardName) {
     alert("Board name is required");
@@ -47,7 +62,16 @@ function addItem() {
     return;
   }
 
-  const item = { boardName, length, width, quantity, material };
+const edging = { ...edgeStates };
+
+const item = {
+  boardName,
+  length,
+  width,
+  quantity,
+  material,
+  edging
+};
 
   if (editIndex !== null) {
   quoteItems[editIndex] = item;
@@ -68,29 +92,46 @@ function renderTable() {
   quoteItems.forEach((item, index) => {
     const row = document.createElement("tr");
 
+    const edgedSides = [];
+
+    if (item.edging.length1) edgedSides.push("Top");
+    if (item.edging.length2) edgedSides.push("Bottom");
+    if (item.edging.width1) edgedSides.push("Left");
+    if (item.edging.width2) edgedSides.push("Right");
+
     row.innerHTML = `
-      <td>${item.boardName}</td>
-      <td>${item.length}</td>
-      <td>${item.width}</td>
-      <td>${item.quantity}</td>
-      <td>${item.material}</td>
-      <td>
-        <button onclick="editItem(${index})">Edit</button>
-        <button onclick="deleteItem(${index})">Delete</button>
-      </td>
-    `;
+    <td>${item.boardName}</td>
+    <td>${item.length}</td>
+    <td>${item.width}</td>
+    <td>${item.quantity}</td>
+    <td>${item.material}</td>
+    <td>${edgedSides.join(", ") || "None"}</td>
+    <td>
+     <button onclick="editItem(${index})">Edit</button>
+    <button onclick="deleteItem(${index})">Delete</button>
+    </td>
+`;
 
     tableBody.appendChild(row);
   });
 }
+
 function clearForm() {
-  boardNameInput.value = "";
-  lengthInput.value = "";
-  widthInput.value = "";
-  quantityInput.value = 1;
-  materialInput.value = "";
-  editIndex = null;
-  addBtn.textContent = "Add to Quote";
+    boardNameInput.value = "";
+    lengthInput.value = "";
+    widthInput.value = "";
+    quantityInput.value = 1;
+    materialInput.value = "";
+    for (const key in edgeStates) {
+       edgeStates[key] = false;
+      }
+
+      document.querySelectorAll(".edge").forEach(edge => {
+        edge.classList.remove("active");
+      });
+
+    editIndex = null;
+    addBtn.textContent = "Add to Quote";
 }
 
 function saveToStorage() {
@@ -106,8 +147,29 @@ function editItem(index) {
   quantityInput.value = item.quantity;
   materialInput.value = item.material;
 
+  for (const key in edgeStates) {
+    edgeStates[key] = false;
+  }
+
+  document.querySelectorAll(".edge").forEach(edge => {
+    edge.classList.remove("active");
+  });
+
+  const edging = quoteItems[index].edging;
+
+
+  for (const key in edging) {
+    if (edging[key]) {
+      edgeStates[key] = true;
+      document.querySelector(`.edge[data-edge="${key}"]`)
+      .classList.add("active");
+    }
+  }
+
   editIndex = index;
   addBtn.textContent = "Update Item";
+  
+
 }
 
 function deleteItem(index) {
