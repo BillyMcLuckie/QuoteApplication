@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quote Builder</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Customer Quote</h1>
+
+  <!-- Form -->
+  <div class="form-container">
+
+  <label>
+    Board Name
+    <input type="text" id="boardName">
+  </label>
+
+  <label>
+    Length (mm)
+    <input type="number" id="length">
+  </label>
+
+  <label>
+    Width (mm)
+    <input type="number" id="width">
+  </label>
+
+  <label>
+    Quantity
+    <input type="number" id="quantity" min="1" value="1">
+  </label>
+
+  <label>
+    Material
+    <select id="material">
+      <option value="">Select material</option>
+      <option value="W1000 st9 18mm">W1000 st9 18mm</option>
+      <option value="U702 st9 18mm">U702 st9 18mm</option>
+      <option value="U708 st9 18mm">U708 st9 18mm</option>
+    </select>
+  </label>
+
+  <button id="addBtn">Add to Quote</button>
+
+</div>
+
+<!--Table -->
+  <table id="quoteTable">
+  <thead>
+    <tr>
+      <th>Board Name</th>
+      <th>Length (mm)</th>
+      <th>Width (mm)</th>
+      <th>Quantity</th>
+      <th>Material</th>
+    </tr>
+  </thead>
+  <tbody id="quoteTableBody">
+  </tbody>
+</table>
+
+  <script src="script.js"></script>
+</body>
+</html>
